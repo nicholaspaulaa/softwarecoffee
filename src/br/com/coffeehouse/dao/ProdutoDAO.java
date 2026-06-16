@@ -38,4 +38,11 @@ public class ProdutoDAO {
         }
         return false;
     }
+
+     static {
+       
+        bancoProdutos.add(new Produto(1L, "Café Expresso", 6.50, "Bebidas"));
+        bancoProdutos.add(new Produto(2L, "Cappuccino Italiano", 9.00, "Bebidas"));
+        bancoProdutos.add(new Produto(3L, "Fatia de Bolo de Cenoura", 12.00, "Confeitaria"));
+    }
 }
