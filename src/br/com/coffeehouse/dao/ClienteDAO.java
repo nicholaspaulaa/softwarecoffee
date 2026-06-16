@@ -39,4 +39,13 @@ public class ClienteDAO {
         }
         return false;
     }
+
+     private static long proximoId = 1;
+
+    public void salvarComIdAuto(Cliente c) {
+        if (c.getId() == null) {
+            c.setId(proximoId++);
+        }
+        salvar(c);
+    }
 }
