@@ -1,6 +1,7 @@
 package br.com.coffeehouse.view;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -15,6 +16,7 @@ public final class TemaApp {
     public static final Color CAMPO = Color.WHITE;
 
     private static final String ARQUIVO_FONTE = "HelveticaNeueBold.otf";
+    private static final int RAIO_BOTAO = 14;
     private static Font fonteBase;
 
     private TemaApp() {
@@ -38,13 +40,16 @@ public final class TemaApp {
     }
 
     public static void estilizarBotao(JButton botao) {
-        botao.setBackground(BOTAO);
         botao.setForeground(BOTAO_TEXTO);
+        botao.setBackground(BOTAO);
         botao.setFont(obterFonte(14));
-        botao.setOpaque(true);
-        botao.setBorderPainted(false);
         botao.setFocusPainted(false);
+        botao.setBorderPainted(false);
+        botao.setContentAreaFilled(false);
+        botao.setOpaque(false);
         botao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        botao.setBorder(BorderFactory.createEmptyBorder(8, 14, 8, 14));
+        botao.setUI(new BotaoArredondadoUI());
     }
 
     public static void estilizarCampo(JTextField campo) {
@@ -138,5 +143,31 @@ public final class TemaApp {
     @FunctionalInterface
     private interface InputStreamSupplier {
         InputStream open() throws Exception;
+    }
+
+    private static final class BotaoArredondadoUI extends BasicButtonUI {
+
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            AbstractButton botao = (AbstractButton) c;
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            Color cor = BOTAO;
+            ButtonModel model = botao.getModel();
+            if (!model.isEnabled()) {
+                cor = cor.brighter();
+            } else if (model.isPressed()) {
+                cor = cor.darker();
+            } else if (model.isRollover()) {
+                cor = cor.brighter();
+            }
+
+            g2.setColor(cor);
+            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), RAIO_BOTAO, RAIO_BOTAO);
+            g2.dispose();
+
+            super.paint(g, c);
+        }
     }
 }

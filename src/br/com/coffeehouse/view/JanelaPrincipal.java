@@ -95,9 +95,10 @@ public class JanelaPrincipal extends JFrame {
     }
 
     private void abrirTelaCaixa() {
-        if (telaCaixa == null || !telaCaixa.isDisplayable()) {
-            telaCaixa = new TelaVendaBalcao();
+        if (telaCaixa != null) {
+            telaCaixa.dispose();
         }
+        telaCaixa = new TelaVendaBalcao();
         telaCaixa.setLocationRelativeTo(this);
         telaCaixa.setVisible(true);
         telaCaixa.toFront();

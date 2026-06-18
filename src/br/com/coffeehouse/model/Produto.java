@@ -22,6 +22,8 @@ public class Produto {
     public void setNome(String nome) { this.nome = nome; }
     public double getPrecoBase() { return precoBase; }
     public void setPrecoBase(double precoBase) { this.precoBase = precoBase; }
+    public String getCategoria() { return category; }
+    public void setCategoria(String categoria) { this.category = categoria; }
 
     public double obterPreco() {
         return this.precoBase;
