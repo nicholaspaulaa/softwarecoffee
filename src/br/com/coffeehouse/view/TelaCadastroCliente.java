@@ -21,20 +21,29 @@ public class TelaCadastroCliente extends JFrame {
         setSize(420, 280);
 
         JPanel painel = new JPanel(new BorderLayout(10, 12));
+        TemaApp.aplicarFundo(painel);
         painel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
         JPanel formulario = new JPanel(new GridLayout(3, 2, 8, 8));
-        formulario.add(new JLabel("Nome:"));
+        TemaApp.aplicarFundo(formulario);
+        formulario.add(criarRotulo("Nome:"));
         formulario.add(tNome);
-        formulario.add(new JLabel("CPF (11 digitos):"));
+        TemaApp.estilizarCampo(tNome);
+        formulario.add(criarRotulo("CPF (11 digitos):"));
         formulario.add(tCpf);
-        formulario.add(new JLabel("Email:"));
+        TemaApp.estilizarCampo(tCpf);
+        formulario.add(criarRotulo("Email:"));
         formulario.add(tEmail);
+        TemaApp.estilizarCampo(tEmail);
 
         JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        TemaApp.aplicarFundo(botoes);
         JButton btnSalvar = new JButton("Salvar");
         JButton btnConsultar = new JButton("Consultar CPF");
         JButton btnListar = new JButton("Listar Todos");
+        TemaApp.estilizarBotao(btnSalvar);
+        TemaApp.estilizarBotao(btnConsultar);
+        TemaApp.estilizarBotao(btnListar);
 
         btnSalvar.addActionListener(e -> salvar());
         btnConsultar.addActionListener(e -> consultar());
@@ -46,7 +55,14 @@ public class TelaCadastroCliente extends JFrame {
 
         painel.add(formulario, BorderLayout.CENTER);
         painel.add(botoes, BorderLayout.SOUTH);
+        getContentPane().setBackground(TemaApp.FUNDO);
         add(painel);
+    }
+
+    private JLabel criarRotulo(String texto) {
+        JLabel rotulo = new JLabel(texto);
+        TemaApp.estilizarRotulo(rotulo);
+        return rotulo;
     }
 
     private void salvar() {

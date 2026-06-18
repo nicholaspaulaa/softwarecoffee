@@ -19,15 +19,22 @@ public class TelaVendaBalcao extends JFrame {
         pedidoCtrl.iniciarNovoPedido(1L);
 
         JPanel painel = new JPanel(new BorderLayout(10, 10));
+        TemaApp.aplicarFundo(painel);
         painel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
         areaItens.setEditable(false);
-        areaItens.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        painel.add(new JScrollPane(areaItens), BorderLayout.CENTER);
+        TemaApp.estilizarAreaTexto(areaItens);
+        areaItens.setBackground(TemaApp.CAMPO);
+        JScrollPane scroll = new JScrollPane(areaItens);
+        scroll.getViewport().setBackground(TemaApp.CAMPO);
+        painel.add(scroll, BorderLayout.CENTER);
 
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        TemaApp.aplicarFundo(painelBotoes);
         JButton btnAdd = new JButton("Adicionar Expresso");
         JButton btnPagar = new JButton("Finalizar Venda");
+        TemaApp.estilizarBotao(btnAdd);
+        TemaApp.estilizarBotao(btnPagar);
 
         btnAdd.addActionListener(e -> adicionarExpresso());
         btnPagar.addActionListener(e -> finalizarVenda());
@@ -36,6 +43,7 @@ public class TelaVendaBalcao extends JFrame {
         painelBotoes.add(btnPagar);
         painel.add(painelBotoes, BorderLayout.SOUTH);
 
+        getContentPane().setBackground(TemaApp.FUNDO);
         add(painel);
     }
 
