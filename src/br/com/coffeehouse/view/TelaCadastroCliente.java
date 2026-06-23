@@ -17,8 +17,8 @@ public class TelaCadastroCliente extends JFrame {
     public TelaCadastroCliente() {
         setTitle("Cadastro de Clientes");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(420, 280));
-        setSize(420, 280);
+        setMinimumSize(new Dimension(520, 320));
+        setSize(520, 320);
 
         JPanel painel = new JPanel(new BorderLayout(10, 12));
         TemaApp.aplicarFundo(painel);
@@ -36,22 +36,27 @@ public class TelaCadastroCliente extends JFrame {
         formulario.add(tEmail);
         TemaApp.estilizarCampo(tEmail);
 
-        JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 8));
         TemaApp.aplicarFundo(botoes);
         JButton btnSalvar = new JButton("Salvar");
         JButton btnConsultar = new JButton("Consultar CPF");
         JButton btnListar = new JButton("Listar Todos");
+        JButton btnExcluir = new JButton("Excluir");
         TemaApp.estilizarBotao(btnSalvar);
         TemaApp.estilizarBotao(btnConsultar);
         TemaApp.estilizarBotao(btnListar);
+        TemaApp.estilizarBotao(btnExcluir);
+        btnExcluir.setBackground(new Color(0xB0, 0x00, 0x20));
 
         btnSalvar.addActionListener(e -> salvar());
         btnConsultar.addActionListener(e -> consultar());
         btnListar.addActionListener(e -> listar());
+        btnExcluir.addActionListener(e -> excluir());
 
         botoes.add(btnSalvar);
         botoes.add(btnConsultar);
         botoes.add(btnListar);
+        botoes.add(btnExcluir);
 
         painel.add(formulario, BorderLayout.CENTER);
         painel.add(botoes, BorderLayout.SOUTH);
@@ -108,6 +113,29 @@ public class TelaCadastroCliente extends JFrame {
 
         JOptionPane.showMessageDialog(this, lista.toString(), "Clientes cadastrados",
                 JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void excluir() {
+        String cpf = sanitizarCpf(tCpf.getText());
+        if (cpf.length() != 11) {
+            JOptionPane.showMessageDialog(this, "Informe um CPF valido para excluir.");
+            return;
+        }
+
+        int confirmacao = JOptionPane.showConfirmDialog(this,
+                "Excluir cliente de CPF " + cpf + "?",
+                "Confirmar exclusao",
+                JOptionPane.YES_NO_OPTION);
+        if (confirmacao != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        boolean removido = ctrl.excluirCliente(cpf);
+        JOptionPane.showMessageDialog(this,
+                removido ? "Cliente removido com sucesso!" : "Cliente nao encontrado.");
+        if (removido) {
+            limparCampos();
+        }
     }
 
     private String sanitizarCpf(String cpf) {

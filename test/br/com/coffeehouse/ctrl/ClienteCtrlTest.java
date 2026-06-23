@@ -4,12 +4,15 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.coffeehouse.TestDataReset;
+
 public class ClienteCtrlTest {
 
     private ClienteCtrl clienteCtrl;
 
     @Before
     public void setUp() {
+        TestDataReset.clientes();
         clienteCtrl = new ClienteCtrl();
     }
 

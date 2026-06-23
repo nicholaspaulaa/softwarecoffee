@@ -23,6 +23,10 @@ public class ClienteCtrl {
         return clienteDAO.buscarPorCpf(cpf);
     }
 
+    public boolean excluirCliente(String cpf) {
+        return clienteDAO.excluir(cpf);
+    }
+
     public List<Cliente> listarTodosClientes() {
         return clienteDAO.listarTodos();
     }

@@ -18,8 +18,8 @@ public class TelaCadastroProduto extends JFrame {
     public TelaCadastroProduto() {
         setTitle("Cadastro de Produtos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(420, 300));
-        setSize(420, 300);
+        setMinimumSize(new Dimension(560, 360));
+        setSize(560, 360);
 
         JPanel painel = new JPanel(new BorderLayout(10, 12));
         TemaApp.aplicarFundo(painel);
@@ -41,7 +41,7 @@ public class TelaCadastroProduto extends JFrame {
         formulario.add(tCategoria);
         TemaApp.estilizarCampo(tCategoria);
 
-        JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        JPanel botoes = new JPanel(new GridLayout(2, 3, 8, 8));
         TemaApp.aplicarFundo(botoes);
         JButton btnSalvar = new JButton("Salvar");
         JButton btnNovo = new JButton("Novo");
@@ -53,6 +53,7 @@ public class TelaCadastroProduto extends JFrame {
         TemaApp.estilizarBotao(btnConsultar);
         TemaApp.estilizarBotao(btnListar);
         TemaApp.estilizarBotao(btnExcluir);
+        btnExcluir.setBackground(new Color(0xB0, 0x00, 0x20));
 
         btnSalvar.addActionListener(e -> salvar());
         btnNovo.addActionListener(e -> limparCampos());

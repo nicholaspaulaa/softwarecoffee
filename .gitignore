@@ -1,7 +1,9 @@
 .idea/
+.vscode/
 *.iml
 out/
 bin/
+target/
 .settings/
 .metadata/
 .classpath/

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.coffeehouse.TestDataReset;
 import br.com.coffeehouse.model.Produto;
 
 public class ProdutoDAOTest {
@@ -12,6 +13,7 @@ public class ProdutoDAOTest {
 
     @Before
     public void setUp() {
+        TestDataReset.produtos();
         produtoDAO = new ProdutoDAO();
     }
 
