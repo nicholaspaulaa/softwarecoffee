@@ -6,13 +6,14 @@ import java.awt.*;
 public class JanelaPrincipal extends JFrame {
 
     private TelaCadastroCliente telaClientes;
+    private TelaCadastroProduto telaProdutos;
     private TelaVendaBalcao telaCaixa;
 
     public JanelaPrincipal() {
         setTitle("BrewMaster POS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(420, 380));
-        setSize(420, 380);
+        setMinimumSize(new Dimension(420, 460));
+        setSize(420, 460);
         setLocationRelativeTo(null);
 
         JPanel painel = new JPanel(new BorderLayout(10, 15));
@@ -25,15 +26,19 @@ public class JanelaPrincipal extends JFrame {
         TemaApp.aplicarFundo(painelBotoes);
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
 
-        JButton btnCaixa = criarBotaoMenu("Abrir Frente de Caixa / Vendas");
-        JButton btnClientes = criarBotaoMenu("Gerenciar Clientes (CRUD)");
+        JButton btnCaixa = criarBotaoMenu("Abrir venda");
+        JButton btnClientes = criarBotaoMenu("Gerenciar clientes");
+        JButton btnProdutos = criarBotaoMenu("Gerenciar produtos");
 
         btnCaixa.addActionListener(e -> abrirTelaCaixa());
         btnClientes.addActionListener(e -> abrirTelaClientes());
+        btnProdutos.addActionListener(e -> abrirTelaProdutos());
 
         painelBotoes.add(btnCaixa);
         painelBotoes.add(Box.createVerticalStrut(12));
         painelBotoes.add(btnClientes);
+        painelBotoes.add(Box.createVerticalStrut(12));
+        painelBotoes.add(btnProdutos);
 
         painel.add(painelBotoes, BorderLayout.CENTER);
         getContentPane().setBackground(TemaApp.FUNDO);
@@ -92,6 +97,15 @@ public class JanelaPrincipal extends JFrame {
         telaClientes.setLocationRelativeTo(this);
         telaClientes.setVisible(true);
         telaClientes.toFront();
+    }
+
+    private void abrirTelaProdutos() {
+        if (telaProdutos == null || !telaProdutos.isDisplayable()) {
+            telaProdutos = new TelaCadastroProduto();
+        }
+        telaProdutos.setLocationRelativeTo(this);
+        telaProdutos.setVisible(true);
+        telaProdutos.toFront();
     }
 
     private void abrirTelaCaixa() {

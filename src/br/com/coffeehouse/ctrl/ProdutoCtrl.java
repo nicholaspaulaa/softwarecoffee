@@ -17,6 +17,15 @@ public class ProdutoCtrl {
         return "Produto salvo com sucesso!";
     }
 
+    public String registrarNovoProduto(String nome, double preco, String categoria) {
+        if (nome == null || nome.trim().isEmpty()) return "Erro: Nome do produto inválido.";
+        if (preco < 0) return "Erro: O preço não pode ser negativo.";
+
+        Produto novo = new Produto(null, nome, preco, categoria);
+        produtoDAO.salvarComIdAuto(novo);
+        return "Produto cadastrado com sucesso! ID: " + novo.getId();
+    }
+
     public List<Produto> listarCardapio() {
         return produtoDAO.listarTodos();
     }
